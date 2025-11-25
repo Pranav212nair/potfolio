@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pranav Nair — Projects & Work</title>
+  <meta name="description" content="Portfolio showcase — clean, modern landing page." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#4fd1c5; /* mint */
+      --accent-2:#2b6cb0; /* deep */
+      --muted:rgba(255,255,255,0.8);
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--muted); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      background-image: url('tt.jpg');
+      background-size: cover; background-position: center; background-attachment: fixed;
+      display:flex; align-items:stretch; justify-content:center;
+    }
+    /* dark overlay for contrast */
+    body::before{ content:""; position:fixed; inset:0; background:linear-gradient(180deg, rgba(2,6,23,0.5), rgba(2,6,23,0.65)); z-index:0 }
+
+    /* page wrapper */
+    .site{position:relative; z-index:1; width:100%; max-width:1200px; padding:40px 28px;}
+
+    header{display:flex; align-items:center; justify-content:flex-end; gap:20px}
+    nav{display:flex; gap:18px}
+    nav a{color:rgba(255,255,255,0.85); text-decoration:none; font-weight:600; font-size:14px; opacity:0.95}
+    nav a.button{background:linear-gradient(90deg,var(--accent),var(--accent-2)); padding:10px 14px; border-radius:10px; color:#05202b}
+
+    /* top centered name */
+    .top-name{display:block; text-align:center; color:#fff; font-weight:700; font-size:44px; letter-spacing:1px; margin-bottom:6px; font-family:'Space Grotesk', Inter, system-ui; text-shadow:0 6px 18px rgba(2,6,23,0.45)}
+
+    /* hero - single column (stacked) */
+    .hero{display:grid; grid-template-columns:1fr; gap:20px; align-items:start; margin-top:36px}
+    .hero-card{background:rgba(255,255,255,0.04); border-radius:18px; padding:36px; box-shadow:0 10px 30px rgba(2,6,23,0.6); backdrop-filter:blur(8px); position:relative; overflow:hidden}
+    .hero h1{margin:0; font-size:44px; line-height:1.02; color:#fff}
+    .hero p{margin-top:12px; color:rgba(255,255,255,0.88); font-size:16px; max-width:60ch}
+    .ctas{margin-top:20px; display:flex; gap:12px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; font-weight:700; cursor:pointer; text-decoration:none}
+    .btn{transition:transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s ease, opacity .12s}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#032026}
+    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.9)}
+    .btn:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(2,6,23,0.45)}
+    .btn:active{transform:translateY(-1px) scale(.995)}
+    .btn:focus{outline:3px solid rgba(79,209,197,0.18); outline-offset:4px}
+    nav a.button{transition:transform .16s ease, box-shadow .16s ease}
+    nav a.button:hover{transform:translateY(-4px); box-shadow:0 10px 24px rgba(2,6,23,0.4)}
+    
+    /* popup animation */
+    .popup-gif{position:absolute; pointer-events:none; z-index:1000; animation:popIn .5s cubic-bezier(.2,.9,.2,1) forwards}
+    @keyframes popIn{
+      0%{opacity:0; transform:scale(0) translateY(20px)}
+      50%{opacity:1}
+      100%{opacity:1; transform:scale(1) translateY(0)}
+    }
+
+    /* right column preview */
+    .preview{border-radius:14px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px}
+    .preview .meta{font-size:13px; color:rgba(255,255,255,0.85)}
+    .project-thumb{height:220px; border-radius:10px; background:linear-gradient(135deg,#0ea5a4 0%, #2b6cb0 100%); display:flex; align-items:center; justify-content:center; font-weight:700; color:white}
+
+    /* projects grid - stacked single column */
+    .projects{margin-top:38px; display:grid; grid-template-columns:1fr; gap:18px}
+    .proj{background:rgba(255,255,255,0.03); padding:18px; border-radius:12px; min-height:160px; border:1px solid rgba(255,255,255,0.04); transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease, border-color .18s ease}
+    .proj:hover{transform:translateY(-6px) scale(1.01); box-shadow:0 20px 40px rgba(2,6,23,0.6); border-color:rgba(255,255,255,0.08)}
+    .proj:focus-within{box-shadow:0 16px 34px rgba(2,6,23,0.55)}
+    /* internships: match project box style and hover; layout for inline image */
+    .intern{transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease, border-color .18s ease}
+    .intern-entry{background:rgba(255,255,255,0.02); padding:12px; border-radius:10px; margin-top:8px; border:1px solid rgba(255,255,255,0.03); transition:transform .22s ease, box-shadow .22s ease; display:flex; gap:14px; align-items:flex-start; justify-content:space-between}
+    .intern-entry:hover{transform:translateY(-6px) scale(1.01); box-shadow:0 16px 36px rgba(2,6,23,0.55); border-color:rgba(255,255,255,0.06)}
+    .intern-entry .meta{margin-top:4px}
+    .intern-img-wrap{display:flex; justify-content:flex-end; align-items:center}
+    .intern-img{width:140px; height:auto; object-fit:contain; border-radius:8px; flex:0 0 140px; box-shadow:0 8px 18px rgba(2,6,23,0.45)}
+    @media (max-width:680px){
+      .intern-entry{flex-direction:column}
+      .intern-img-wrap{justify-content:flex-start; margin-top:12px}
+      .intern-img{width:100%; max-height:240px; flex:unset}
+    }
+    .proj h3{margin:0; color:#fff}
+    .proj p{margin-top:8px; color:rgba(255,255,255,0.8)}
+    .proj-content{display:flex; gap:14px; align-items:flex-start}
+    /* larger, uncropped thumbnails (show full image/gif) */
+    .proj-thumb-img{width:260px; height:auto; max-height:220px; object-fit:contain; border-radius:8px; flex:0 0 260px; display:block; filter:brightness(1.03) saturate(1.08); box-shadow:0 8px 20px rgba(2,6,23,0.45); background:transparent}
+    .thumb-wrap{overflow:visible; border-radius:10px; background:transparent; padding:0}
+    .proj .thumb-wrap img{transition:transform .4s cubic-bezier(.2,.9,.2,1)}
+    .proj:hover .proj-thumb-img, .proj:hover .multi-thumbs img{transform:scale(1.06)}
+    .proj-points{margin:6px 0 0; padding-left:18px; color:rgba(255,255,255,0.9)}
+    .multi-thumbs{display:flex; gap:8px; align-items:center}
+    .multi-thumbs img{width:64px; height:48px; object-fit:cover; border-radius:6px; flex:0 0 64px}
+    .multi-thumbs img{transition:transform .36s cubic-bezier(.2,.9,.2,1)}
+
+    footer{margin-top:34px; color:rgba(255,255,255,0.6); font-size:13px; text-align:center}
+    .social-links{display:flex; gap:16px; justify-content:center; align-items:center; margin-bottom:12px}
+    .social-links a{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.08); transition:transform .22s cubic-bezier(.2,.9,.2,1), background .18s ease, box-shadow .18s ease}
+    .social-links a:hover{background:rgba(255,255,255,0.12); transform:translateY(-4px); box-shadow:0 8px 20px rgba(2,6,23,0.4)}
+    .social-links img{width:20px; height:20px; opacity:0.9}
+
+    /* responsive */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr}
+      .projects{grid-template-columns:repeat(2,1fr)}
+      .preview{order:2}
+    }
+    @media (max-width:680px){
+      .projects{grid-template-columns:1fr}
+      header{flex-direction:column; align-items:flex-start; gap:12px}
+      .hero h1{font-size:32px}
+    }
+    @media (max-width:680px){
+      .proj-content{flex-direction:column}
+      .proj-thumb-img{width:100%; height:auto; max-height:360px; flex:unset}
+      .thumb-wrap{padding:0}
+    }
+    /* info sections - stacked */
+    .info-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:28px}
+    .edu, .intern{background:rgba(255,255,255,0.03); padding:18px; border-radius:12px}
+    .edu h4, .intern h4{margin:0 0 8px 0; color:#fff}
+    .edu ul, .intern ul{margin:8px 0 0; padding-left:18px; color:rgba(255,255,255,0.85)}
+    @media (max-width:1024px){
+      .info-grid{grid-template-columns:1fr}
+    }
+    /* certifications grid - clickable boxes with hover effects */
+    .certs-grid{margin-top:28px}
+    .certs-list{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .cert-box{background:rgba(255,255,255,0.03); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease, border-color .18s ease; cursor:pointer}
+    .cert-box:hover{transform:translateY(-6px) scale(1.01); box-shadow:0 16px 36px rgba(2,6,23,0.55); border-color:rgba(255,255,255,0.08)}
+    .certs-list a{text-decoration:none; color:inherit}
+    @media (max-width:1024px){
+      .certs-list{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:680px){
+      .certs-list{grid-template-columns:1fr}
+    }
+    /* skills section grid */
+    .skills-section{margin-top:38px}
+    .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+    .skill-category{background:rgba(255,255,255,0.03); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.04)}
+    @media (max-width:1024px){
+      .skills-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <div class="top-name">PRANAV NAIR</div>
+    <header>
+      <nav>
+        <a href="#projects">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a href="https://drive.google.com/file/d/1fgho61YZZjvgzpVpZbFYYMs6030R42cO/view?usp=drive_link" class="button" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>My Summary</h1>
+        <p>Full-stack engineer specializing in production-grade web applications and IoT systems. I combine technical depth with product thinking to deliver measurable business impact. Proven track record optimizing complex systems, reducing operational friction by 25-30%, and shipping reliable solutions across cloud, edge, and embedded platforms.</p>
+
+        <div class="ctas">
+          <a class="btn primary" href="#projects">View Work</a>
+          <a class="btn ghost"  id="get-in-touch">Get in touch</a>
+        </div>
+      </div>
+
+      <aside class="preview">
+        <div class="project-thumb" style="height:280px"><img src="14.png" alt="Live Demo" style="width:100%; height:100%; object-fit:cover; border-radius:10px"></div>
+        <div style="margin-top:12px" class="meta"></div>
+        <div style="margin-top:12px">
+          <strong style="color:#fff">Availability</strong>
+          <div style="color:rgba(255,255,255,0.8); margin-top:6px">Open to contracts and collaborations. Email is fastest.</div>
+        </div>
+      
+        <!-- skills section in preview -->
+        
+      
+        <!-- internships moved here (was in info-grid) -->
+        <div style="margin-bottom:12px; margin-top:28px">
+          <h2 style="color:#fff; font-weight:800; font-size:26px; margin:0; letter-spacing:0.5px">INTERNSHIP</h2>
+        </div>
+        <div class="intern" id="internships-preview" style="margin-top:14px">
+          <a href="https://github.com/Pranav212nair/p" target="_blank" rel="noopener" style="text-decoration:none; color:inherit">
+            <div class="intern-entry" style="margin-top:6px">
+            <div class="intern-main" style="flex:1">
+              <strong>Intern – Aditya Birla Hindalco Industries Ltd</strong>
+              <div class="meta" style="font-size:13px; color:rgba(255,255,255,0.85); margin-top:4px">May 2024 – June 2024</div>
+              <ul style="margin:8px 0 0; padding-left:18px; color:rgba(255,255,255,0.9)">
+                <li>Developed a full-stack Tool Tracking System using HTML/CSS/JS, PHP and MySQL.</li>
+                <li>Implemented barcode-based tracking and real-time status updates, reducing retrieval time by ~30%.</li>
+                <li>Created reporting dashboards and migration scripts to increase inventory accuracy and reporting.</li>
+              </ul>
+            </div>
+            <div class="intern-img-wrap">
+              <img src="7.jpg" alt="Hindalco project" class="intern-img">
+            </div>
+          </div>
+        </a>
+
+        </div>
+      </aside>
+    </section>
+
+    <section id="skills" class="skills-section" aria-label="Skills">
+      <h2 style="color:#fff; font-weight:800; font-size:26px; margin:0 0 18px 0; letter-spacing:0.5px">SKILLS</h2>
+      
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h4 style="color:#4fd1c5; font-weight:700; margin:0 0 8px 0">Programming & Web</h4>
+          <p style="margin:0; color:rgba(255,255,255,0.85); font-size:14px">Java, Python, R, HTML, CSS, JavaScript, PHP, React.js, TypeScript</p>
+        </div>
+
+        <div class="skill-category">
+          <h4 style="color:#4fd1c5; font-weight:700; margin:0 0 8px 0">Databases & Data</h4>
+          <p style="margin:0; color:rgba(255,255,255,0.85); font-size:14px">SQL, MongoDB, Cassandra, Neo4j, Firebase, Data Modeling, Query Optimization</p>
+        </div>
+
+        <div class="skill-category">
+          <h4 style="color:#4fd1c5; font-weight:700; margin:0 0 8px 0">Cloud & Platforms</h4>
+          <p style="margin:0; color:rgba(255,255,255,0.85); font-size:14px">AWS (EC2, S3, Lambda), MATLAB, RStudio, ThingSpeak, Google Cloud, Docker</p>
+        </div>
+
+        <div class="skill-category">
+          <h4 style="color:#4fd1c5; font-weight:700; margin:0 0 8px 0">IoT & Hardware</h4>
+          <p style="margin:0; color:rgba(255,255,255,0.85); font-size:14px">Arduino, ESP8266, NodeMCU, IR/Gas Sensors, Sensor Integration, Firmware Development</p>
+        </div>
+
+        <div class="skill-category">
+          <h4 style="color:#4fd1c5; font-weight:700; margin:0 0 8px 0">Tools & Platforms</h4>
+          <p style="margin:0; color:rgba(255,255,255,0.85); font-size:14px">Git, GitHub, Cisco Packet Tracer, VS Code, Postman, Linux, CI/CD Pipelines</p>
+        </div>
+
+        <div class="skill-category">
+          <h4 style="color:#4fd1c5; font-weight:700; margin:0 0 8px 0">Soft Skills</h4>
+          <p style="margin:0; color:rgba(255,255,255,0.85); font-size:14px">Problem Solving, Critical Thinking, Communication, Teamwork, Adaptability, Leadership</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects" aria-label="Projects">
+      <h2 style="color:#fff; font-weight:800; font-size:26px; margin:0 0 18px 0; letter-spacing:0.5px">PROJECT</h2>
+      
+      <a href="https://thingspeak.mathworks.com/channels/693165" target="_blank" rel="noopener" style="text-decoration:none; color:inherit">
+        <article class="proj">
+          <div class="proj-content">
+            <div class="thumb-wrap">
+              <img src="4.png" alt="IoT Weather Monitoring main" class="proj-thumb-img">
+            </div>
+            <div>
+              <h3>IoT Weather Monitoring</h3>
+              <ul class="proj-points">
+                <li>ESP8266 (NodeMCU) + DHT11 for temperature & humidity sensing.</li>
+                <li>Real-time telemetry to ThingSpeak with live visualizations and historical charts.</li>
+                <li>Local buffering and low-power sampling for resilient telemetry over intermittent connectivity.</li>
+                <li>Threshold-based alerting (email/SMS) and CSV export for analysis.</li>
+              </ul>
+
+              <div class="multi-thumbs" aria-hidden="true" style="margin-top:12px">
+                <img src="1.png" alt="Weather sensor 1">
+                <img src="2.png" alt="Weather sensor 2">
+                <img src="3.png" alt="Weather sensor 3">
+              </div>
+            </div>
+          </div>
+        </article>
+      </a>
+
+      <article class="proj">
+        <div class="proj-content">
+          <div class="thumb-wrap">
+            <img src="5.gif" alt="Smart Sense" class="proj-thumb-img">
+          </div>
+          <div>
+            <h3>Smart Sense</h3>
+            <ul class="proj-points">
+              <li>Edge sensors (IR, gas) for traffic density and air-quality measurements.</li>
+              <li>On-device preprocessing with aggregated batches sent to cloud for analytics.</li>
+              <li>Analytics-driven signal optimization that reduces congestion and improves air quality.</li>
+              <li>Dashboard visualizations and scheduled reporting for city planners.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <a href="https://oneflick-lovat.vercel.app/" target="_blank" rel="noopener" style="text-decoration:none; color:inherit">
+        <article class="proj">
+          <div class="proj-content">
+            <div class="thumb-wrap">
+              <img src="6.png" alt="One Flick" class="proj-thumb-img">
+            </div>
+            <div>
+              <h3>One Flick</h3>
+              <ul class="proj-points">
+                <li>Browser extension that autofills forms from structured resume data to speed applications.</li>
+                <li>Privacy-first design: data stored locally and never shared without consent.</li>
+                <li>Cross-browser compatibility and lightweight performance optimizations.</li>
+                <li>Includes customization and field-mapping for different sites and platforms.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </a>
+
+      <a href="https://github.com/Pranav212nair/CookBook" target="_blank" rel="noopener" style="text-decoration:none; color:inherit">
+        <article class="proj">
+          <div class="proj-content">
+            <div class="thumb-wrap">
+              <img src="8.jpg" alt="CookBook" class="proj-thumb-img">
+            </div>
+            <div>
+              <h3>CookBook</h3>
+              <ul class="proj-points">
+                <li>Ingredient-based recipe recommendation engine suggesting meals from items users already have.</li>
+                <li>Fuzzy matching and preprocessing to normalize and accurately match ingredients against large recipe datasets.</li>
+                <li>Full-stack architecture: PHP (frontend), Node.js/Express (API), Python (search/ETL), MySQL (user data).</li>
+                <li>User authentication, favorites/bookmarks, meal planning, and admin dashboard for dataset management.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </a>
+
+      <a href="https://ai-assisted-document-2tcs.vercel.app/" target="_blank" rel="noopener" style="text-decoration:none; color:inherit">
+        <article class="proj">
+          <div class="proj-content">
+            <div class="thumb-wrap">
+              <img src="9.jpg" alt="AI Assisted Document" class="proj-thumb-img">
+            </div>
+            <div>
+              <h3>AI-Assisted Document Writer</h3>
+              <ul class="proj-points">
+                <li>Intelligent document editor with real-time AI suggestions and content enhancement capabilities.</li>
+                <li>Integrated LLM-powered API for grammar correction, tone adjustment, and context-aware writing assistance.</li>
+                <li>Collaborative editing features with version control and revision history tracking.</li>
+                <li>Responsive design optimized for productivity with keyboard shortcuts and inline editing workflows.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </a>
+    </section>
+
+    <!-- Additional info sections: Education & Internships -->
+    <section class="info-grid" aria-label="Education and Internships" style="margin-top:28px">
+      <div style="grid-column:1/-1">
+        <h2 style="color:#fff; font-weight:800; font-size:26px; margin:0 0 18px 0; letter-spacing:0.5px">EDUCATION</h2>
+      </div>
+      <div class="edu" id="education">
+        <ul>
+          <li><strong>Vellore Institute of Technology (VIT-AP)</strong> — B.Tech, Computer Science (Batch of 2026)</li>
+          <li style="margin-top:6px;"><strong>Madnawati Public School</strong> — 12th (2022)</li>
+          <li style="margin-top:6px;"><strong>Vedic International School</strong> — 10th (2020)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certs-grid" aria-label="Certifications" style="margin-top:28px">
+      <h2 style="color:#fff; font-weight:800; font-size:26px; margin:0 0 18px 0; letter-spacing:0.5px; grid-column:1/-1">CERTIFICATIONS</h2>
+      <div class="certs-list">
+        <a href="https://drive.google.com/file/d/1Ycl3JWsbgh-sR5ODxBP824uQw8GY-Qju/view" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>AWS Cloud Foundations</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">Amazon Web Services</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Comprehensive understanding of AWS core services and architecture fundamentals.</li>
+              <li>Hands-on practice with compute, storage, and networking components.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1J96-LN-3hcPuCQ_xNM2kca3dFIY8FAeW/view" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>AWS Cloud Architecting</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">Amazon Web Services</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Advanced AWS design principles and scalable infrastructure patterns.</li>
+              <li>Security, reliability, and cost optimization best practices.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1od8z98_ZE69FbBYuyd07-hps7PZrjfuV/view" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>Generative AI Professional</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">Oracle</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Fundamentals of AI/ML and modern generative AI applications.</li>
+              <li>Practical experience with prompt engineering and AI model integration.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1SRwbsNpGdjhzPYto9BtAyMk-4ryCRvjc/view" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>Cloud Infrastructure Foundation Associate</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">Oracle</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Cloud deployment models and infrastructure as a service concepts.</li>
+              <li>Oracle Cloud ecosystem and enterprise architecture principles.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1JbY88bFw7TyGyx6CRskcz4BRJxFKYBvV/view" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>Front-End Web Development</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">IBM · HTML, CSS, JavaScript</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Core web technologies and responsive design techniques.</li>
+              <li>DOM manipulation and user interface best practices.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1nHtW7AIWGk6pUJg3OnNvQtLakhEdPS1w/view" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>MATLAB Training</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">Certification</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Scientific computing and numerical analysis with MATLAB.</li>
+              <li>Data visualization and algorithm implementation.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1awFRd7Uk2jfZp87w3S-Yd1eQaCF7bjgQ/view?usp=drive_link" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>HackFest 2024 Participation</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">24-Hour Coding Challenge</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Rapid prototyping and team-based problem solving under time pressure.</li>
+              <li>Full-stack implementation of working proof-of-concept solutions.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1efKvHPcGRQh9JM4Ae48PK_ZieuxDFsXo/view?usp=drive_link" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>Internship Completion</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">Aditya Birla Hindalco Industries Ltd</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>Delivered production-ready full-stack web application.</li>
+              <li>Contributed to real operational improvements and process optimization.</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1zPfKFiyPMPKyMuwHza3kLhMGUNy-I7Da/view?usp=drive_link" target="_blank" rel="noopener">
+          <div class="cert-box">
+            <h4>MongoDB Associate Database</h4>
+            <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:4px 0 0">MongoDB</p>
+            <ul style="margin:8px 0 0; padding-left:16px; font-size:13px; color:rgba(255,255,255,0.85)">
+              <li>NoSQL database design and MongoDB query language expertise.</li>
+              <li>Schema design, indexing strategies, and performance optimization.</li>
+            </ul>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div class="social-links">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pranav.nair212@gmail.com" target="_blank" title="Email" rel="noopener">
+          <img src="10.png" alt="Email">
+        </a>
+        <a href="https://github.com/Pranav212nair" target="_blank" title="GitHub" rel="noopener">
+          <img src="11.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/pranavnair212/" target="_blank" title="LinkedIn" rel="noopener">
+          <img src="12.png" alt="LinkedIn">
+        </a>
+      </div>
+      <div>© 2025 • Designed for clarity & impact</div>
+    </footer>
+  </div>
+
+  <script>
+    // popup for get in touch button
+    document.getElementById('get-in-touch')?.addEventListener('click', e=>{
+      e.preventDefault();
+      const btn = e.target;
+      const heroCard = document.querySelector('.hero-card');
+      const rect = btn.getBoundingClientRect();
+      const cardRect = heroCard.getBoundingClientRect();
+      const popup = document.createElement('img');
+      popup.src = '13.gif';
+      popup.alt = 'Hello!';
+      popup.className = 'popup-gif';
+      popup.style.width = '160px';
+      popup.style.height = 'auto';
+      popup.style.left = (rect.right - cardRect.left + 20) + 'px';
+      popup.style.top = (rect.bottom - cardRect.top - 70) + 'px';
+      heroCard.appendChild(popup);
+      setTimeout(() => popup.remove(), 3000);
+      window.location.href = 'mailto:pranav.nair212@gmail.com';
+    });
+
+    // smooth-scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href === '#' ) return;
+        const target = document.querySelector(href);
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+</body>
+</html>
